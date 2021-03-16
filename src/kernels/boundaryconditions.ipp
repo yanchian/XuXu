@@ -63,7 +63,7 @@ __global__ void setSpecialBoundaryConditionsKernel(Mesh<GPU>::type u) {
   const int k = blockIdx.x * blockDim.x + threadIdx.x - u.ghostCells();
 for (int n_cube = 0; n_cube < number; n_cube++){
 	
-if (XDIR && u.exists(k, 0) && k > u.i(300 + n_cube*space) && k < u.i(300 + n_cube*space+length_x)) {
+if (XDIR && u.exists(k, 0) && k > u.i(300 + n_cube*space) && k < u.i(300 + n_cube*space + length_x)) {
 
     const int j = u.j(length_y);
     for (int n = 0; n < 2; n++) {
@@ -87,5 +87,32 @@ if (XDIR && u.exists(k, 0) && k > u.i(300 + n_cube*space) && k < u.i(300 + n_cub
       u(i_2 - n - 1, k, XMOMENTUM) = -u(i_2 - n - 1, k, XMOMENTUM);
     }
   }
+
+
+else if (XDIR && u.exists(k, 0) && k > u.i(300 + n_cube*space + phase) && k < u.i(300 + n_cube*space + length_x + phase)) {
+
+    const int j = u.j(300-length_y);
+    for (int n = 0; n < 2; n++) {
+      u(k, j + n + 1) = u(k, j - n);
+      u(k, j + n + 1, YMOMENTUM) = -u(k, j + n + 1, YMOMENTUM);
+    }
+
+  }
+
+  else if (!XDIR && u.exists(0, k) && k > u.j(300-length_y) && k < u.j(300)) {
+
+    const int i_1 = u.i(300 + n_cube*space + phase);
+    for (int n = 0; n < 2; n++) {
+      u(i_1 + n + 1, k) = u(i_1 - n, k);
+      u(i_1 + n + 1, k, XMOMENTUM) = -u(i_1 + n + 1, k, XMOMENTUM);
+    }
+
+    const int i_2 = u.i(300 + n_cube*space+length_x + phase);
+    for (int n = 0; n < 2; n++) {
+      u(i_2 - n - 1, k) = u(i_2 + n, k);
+      u(i_2 - n - 1, k, XMOMENTUM) = -u(i_2 - n - 1, k, XMOMENTUM);
+    }
+  }
 }
+
 }
