@@ -96,7 +96,7 @@ const real block_y2 = 285.0;
 
 //rough tube
 
-const real Number = 10; //number of the cubes
+const real number = 10; //number of the cubes
 const real length_x = 15; //horizontal length of the cubes
 const real length_y = 15; //vertical length of the cubes
 const real space = 60; //space between the cubes in a row
