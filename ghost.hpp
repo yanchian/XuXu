@@ -96,6 +96,11 @@ const real block_y2 = 285.0;
 
 //rough tube
 
+const real Number = 10; //number of the cubes
+const real length = 15; //length of the cubes
+const real space = 60; //space between the cubes in a row
+const real phase = 30; //phase shift between top and bot cubes
+
 const real X11 = 300.0;
 const real Y11 = 0.0;
 const real X12 = 315.0;
