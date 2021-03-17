@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "png.h"
+#include "ghost.hpp"
 
 enum DisplayTypes { RHO, PRESSUREFOO,
 #ifdef REACTIVE
@@ -84,8 +85,25 @@ __global__ void renderKernel(const typename Mesh<GPU>::type grid, real* data, co
     } else
 #endif
 #ifdef REACTIVE
+ /*for (int n_cube = 1; n_cube < (number-1); n_cube++){
+		if (grid.x(gi) >= (300 + 0*space) && grid.x(gi) <= (300 + 0*space + length_x))
+		{
+			data[ni * j + i] = NAN;
+			} 
+ }*/
+ 
+/*			
+ for (int n_cube = 1; n_cube < (number-1); n_cube++){
 
-    if ((grid.x(gi) >= X11 && grid.x(gi) <= X12 && grid.y(gj) >= Y11 && grid.y(gj) <= Y12) || (grid.x(gi) >= X21 && grid.x(gi) <= X22 && grid.y(gj) >= Y21 && grid.y(gj) <= Y22) || (grid.x(gi) >= X31 && grid.x(gi) <= X32 && grid.y(gj) >= Y31 && grid.y(gj) <= Y32) || (grid.x(gi) >= X41 && grid.x(gi) <= X42 && grid.y(gj) >= Y41 && grid.y(gj) <= Y42) || (grid.x(gi) >= X51 && grid.x(gi) <= X52 && grid.y(gj) >= Y51 && grid.y(gj) <= Y52)|| (grid.x(gi) >= X61 && grid.x(gi) <= X62 && grid.y(gj) >= Y61 && grid.y(gj) <= Y62)|| (grid.x(gi) >= X71 && grid.x(gi) <= X72 && grid.y(gj) >= Y71 && grid.y(gj) <= Y72)|| (grid.x(gi) >= X81 && grid.x(gi) <= X82 && grid.y(gj) >= Y81 && grid.y(gj) <= Y82)|| (grid.x(gi) >= X91 && grid.x(gi) <= X92 && grid.y(gj) >= Y91 && grid.y(gj) <= Y92)|| (grid.x(gi) >= X101 && grid.x(gi) <= X102 && grid.y(gj) >= Y101 && grid.y(gj) <= Y102)|| (grid.x(gi) >= X103 && grid.x(gi) <= X104 && grid.y(gj) >= Y103 && grid.y(gj) <= Y104) || (grid.x(gi) >= X105 && grid.x(gi) <= X106 && grid.y(gj) >= Y105 && grid.y(gj) <= Y106)|| (grid.x(gi) >= X107 && grid.x(gi) <= X108 && grid.y(gj) >= Y107 && grid.y(gj) <= Y108) || (grid.x(gi) >= X109 && grid.x(gi) <= X110 && grid.y(gj) >= Y109 && grid.y(gj) <= Y110) || (grid.x(gi) >= X111 && grid.x(gi) <= X112 && grid.y(gj) >= Y111 && grid.y(gj) <= Y112) || (grid.x(gi) >= X113 && grid.x(gi) <= X114 && grid.y(gj) >= Y113	&& grid.y(gj) <= Y114) || (grid.x(gi) >= X115 && grid.x(gi) <= X116 && grid.y(gj) >= Y115 && grid.y(gj) <= Y116) || (grid.x(gi) >= X117 && grid.x(gi) <= X118 && grid.y(gj) >= Y117 && grid.y(gj) <= Y118) || (grid.x(gi) >= X119 && grid.x(gi) <= X120 && grid.y(gj) >= Y119 && grid.y(gj) <= Y120) || (grid.x(gi) >= X121 && grid.x(gi) <= X122 && grid.y(gj) >= Y121 && grid.y(gj) <= Y122) ) {
+	if (grid.x(gi) >= (300 + n_cube*space) && grid.x(gi) <= (300 + n_cube*space + length_x)){
+			data[ni * j + i] = NAN;
+	} 
+	} else if (grid.x(gi) >= (300 + (number-1)*space) && grid.x(gi) <= (300 + (number-1)*space + length_x))
+		{
+			data[ni * j + i] = NAN;
+			} else */
+/*
+    if ((grid.x(gi) >= X31 && grid.x(gi) <= X32 && grid.y(gj) >= Y31 && grid.y(gj) <= Y32) || (grid.x(gi) >= X41 && grid.x(gi) <= X42 && grid.y(gj) >= Y41 && grid.y(gj) <= Y42) || (grid.x(gi) >= X51 && grid.x(gi) <= X52 && grid.y(gj) >= Y51 && grid.y(gj) <= Y52)|| (grid.x(gi) >= X61 && grid.x(gi) <= X62 && grid.y(gj) >= Y61 && grid.y(gj) <= Y62)|| (grid.x(gi) >= X71 && grid.x(gi) <= X72 && grid.y(gj) >= Y71 && grid.y(gj) <= Y72)|| (grid.x(gi) >= X81 && grid.x(gi) <= X82 && grid.y(gj) >= Y81 && grid.y(gj) <= Y82)|| (grid.x(gi) >= X91 && grid.x(gi) <= X92 && grid.y(gj) >= Y91 && grid.y(gj) <= Y92)|| (grid.x(gi) >= X101 && grid.x(gi) <= X102 && grid.y(gj) >= Y101 && grid.y(gj) <= Y102)|| (grid.x(gi) >= X103 && grid.x(gi) <= X104 && grid.y(gj) >= Y103 && grid.y(gj) <= Y104) || (grid.x(gi) >= X105 && grid.x(gi) <= X106 && grid.y(gj) >= Y105 && grid.y(gj) <= Y106)|| (grid.x(gi) >= X107 && grid.x(gi) <= X108 && grid.y(gj) >= Y107 && grid.y(gj) <= Y108) || (grid.x(gi) >= X109 && grid.x(gi) <= X110 && grid.y(gj) >= Y109 && grid.y(gj) <= Y110) || (grid.x(gi) >= X111 && grid.x(gi) <= X112 && grid.y(gj) >= Y111 && grid.y(gj) <= Y112) || (grid.x(gi) >= X113 && grid.x(gi) <= X114 && grid.y(gj) >= Y113	&& grid.y(gj) <= Y114) || (grid.x(gi) >= X115 && grid.x(gi) <= X116 && grid.y(gj) >= Y115 && grid.y(gj) <= Y116) || (grid.x(gi) >= X117 && grid.x(gi) <= X118 && grid.y(gj) >= Y117 && grid.y(gj) <= Y118) || (grid.x(gi) >= X119 && grid.x(gi) <= X120 && grid.y(gj) >= Y119 && grid.y(gj) <= Y120) || (grid.x(gi) >= X121 && grid.x(gi) <= X122 && grid.y(gj) >= Y121 && grid.y(gj) <= Y122) ) {
  //if ((grid.x(gi) >= X11 && grid.x(gi) <= X12 && grid.y(gj) >= Y11 && grid.y(gj) <= Y12) || (grid.x(gi) >= X21 && grid.x(gi) <= X22 && grid.y(gj) >= Y21 && grid.y(gj) <= Y22) || (grid.x(gi) >= X31 && grid.x(gi) <= X32 && grid.y(gj) >= Y31 && grid.y(gj) <= Y32) || (grid.x(gi) >= X41 && grid.x(gi) <= X42 && grid.y(gj) >= Y41 && grid.y(gj) <= Y42) || (grid.x(gi) >= X51 && grid.x(gi) <= X52 && grid.y(gj) >= Y51 && grid.y(gj) <= Y52)|| (grid.x(gi) >= X61 && grid.x(gi) <= X62 && grid.y(gj) >= Y61 && grid.y(gj) <= Y62)) {
        //  if ((grid.x(gi) <= XCORNER && grid.y(gj) >= YCORNER)) {
       //   if (grid.x(gi) <= XCORNER && grid.y(gj) >= YCORNER) {
@@ -93,6 +111,7 @@ __global__ void renderKernel(const typename Mesh<GPU>::type grid, real* data, co
     //      } else if ( grid.x(gi) >= 1.2*XCORNER && grid.y(gj) >= YCORNER){
     //    data[ni * j + i] = NAN;
      } else
+*/
 
 #endif
     if (plotVariable >= DISPLAYTYPES) {
@@ -129,16 +148,51 @@ __global__ void renderKernel(const typename Mesh<GPU>::type grid, real* data, co
 
         // second order approximation to du/dz and dv/dx
         data[ni * j + i] = (uPlus - uMinus) / (2 * grid.dy()) - (vPlus - vMinus) / (2 * grid.dx());
-        if (plotVariable == POSVORTICITY) {
+      /*   if (plotVariable == POSVORTICITY) {
           data[ni * j + i] = fmax(0, data[ni * j + i]);
         } else if (plotVariable == NEGVORTICITY) {
           data[ni * j + i] = fmin(0, data[ni * j + i]);
-        }
+        } */
+		
+		 data[ni * j + i] = (uPlus - uMinus) / (2 * grid.dy()) - (vPlus - vMinus) / (2 * grid.dx());
+        if (plotVariable == POSVORTICITY) {
+		if (data[ni * j + i] >= 0) {
+		data[ni * j + i] = data[ni * j + i];
+		}
+		else {
+			data[ni * j + i] = 0;
+		}
+		} else if (plotVariable == NEGVORTICITY) {
+			if (data[ni * j + i] >= 0) {
+		data[ni * j + i] = 0;
+		}
+		else {
+			data[ni * j + i] = data[ni * j + i];
+		}
+		}
+		
       } else {
         data[ni * j + i] = 0;
       }
-    }
-  }
+    } 
+  } 
+    if (i < ni && j < nj) {
+    real p[NUMBER_VARIABLES];
+    conservativeToPrimitive(grid(gi, gj), p);
+	
+	for (int n_cube = 0; n_cube < number; n_cube++){
+	
+	if (grid.x(gi) >= (start_x + n_cube*space) && grid.x(gi) <= (start_x + n_cube*space + length_x) && grid.y(gj) >= 0 && grid.y(gj) <= length_y)
+		{
+			data[ni * j + i] = NAN;
+			} 
+	
+	else if (grid.x(gi) >= (start_x + n_cube*space + phase) && grid.x(gi) <= (start_x + n_cube*space + length_x + phase) && grid.y(gj) >= (diameter-length_y) && grid.y(gj) <= diameter)
+		{
+			data[ni * j + i] = NAN;
+			} 
+	}
+	}
 }
 
 struct limits {
