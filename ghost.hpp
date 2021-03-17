@@ -1,4 +1,4 @@
-/*
+﻿/*
   Copyright © Cambridge Numerical Solutions Ltd 2013
 */
 //#define GHOST
@@ -96,12 +96,15 @@ const real block_y2 = 285.0;
 
 //rough tube
 
-const real number = 10; //number of the cubes
+const real number = 20; //number of the cubes
 const real length_x = 15; //horizontal length of the cubes
 const real length_y = 15; //vertical length of the cubes
 const real space = 60; //space between the cubes in a row
 const real phase = 30; //phase shift between top and bot cubes
+const real start_x = 300; //the start point of the first cube
+const real diameter = 300; //diameter of the tube
 
+/*
 const real X11 = 300.0;
 const real Y11 = 0.0;
 const real X12 = 315.0;
@@ -182,7 +185,7 @@ const real X121 = 865.0;
 const real Y121 = 285;
 const real X122 = 880.0;
 const real Y122 = 300.0;
-
+*/
 
 // Parameters for 2-step kinetics (unstable H2/O2)
 const real Q = 21.365;
@@ -240,7 +243,7 @@ real Check = 1.0;
 real density_new = 1.0;
 const real Delta_rho = 0.0;
 const real frame_interface = 1.0;
-const real Plot_step = 0.5;
+const real Plot_step = 9.5;
 real Plot_counter = 1.0;
 const int Skip_lines = 5;
 
