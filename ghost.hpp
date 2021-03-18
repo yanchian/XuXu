@@ -96,7 +96,7 @@ const real block_y2 = 285.0;
 
 //rough tube
 
-const real number = 20; //number of the cubes
+const real number = 10; //number of the cubes
 const real length_x = 15; //horizontal length of the cubes
 const real length_y = 15; //vertical length of the cubes
 const real space = 60; //space between the cubes in a row
@@ -243,7 +243,7 @@ real Check = 1.0;
 real density_new = 1.0;
 const real Delta_rho = 0.0;
 const real frame_interface = 1.0;
-const real Plot_step = 9.5;
+const real Plot_step = 0.5;
 real Plot_counter = 1.0;
 const int Skip_lines = 5;
 

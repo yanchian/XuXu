@@ -299,8 +299,7 @@ uCPU = *solver.u;
 
 
 //Save Conserved Variables and Patch///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
- //if (uCPU(uCPU.activeNx()-30*cell, 750)[PMAX] > (1.0+1.0e-4)){
- if (uCPU(uCPU.activeNx()- (30 * cell), (uCPU.activeNy()/2))[PMAX] > (1.0+1.0e-4)){
+ if (uCPU(uCPU.activeNx()-30*cell, uCPU.activeNx/2)[PMAX] > (1.0+1.0e-4)){
 /////////////////////////////////////////////////////////
 	    std::stringstream filename;
         filename << solver.outputDirectory << "Density_input" << std::setw(6) << std::setfill('0') << solver.getOutputNumber() << ".vtk";
@@ -316,7 +315,7 @@ uCPU = *solver.u;
         outFile << "CELL_DATA " << uCPU.activeNx() * uCPU.activeNy() << std::endl;
 
         for (int j = 0; j < uCPU.activeNy(); ++j) {
-           for (int i = (2*uCPU.activeNx()/3 - space*cell); i < uCPU.activeNx(); ++i) {
+           for (int i = uCPU.activeNx()/2; i < uCPU.activeNx(); ++i) {
 		  //for (int i = 0; i < uCPU.activeNx(); ++i) {
           //for (int i = 2*uCPU.activeNx()/3; i < uCPU.activeNx(); ++i) {
             outFile << std::fixed << uCPU(i, j)[DENSITY] << std::endl;
@@ -338,7 +337,7 @@ uCPU = *solver.u;
         outFile1 << "CELL_DATA " << uCPU.activeNx() * uCPU.activeNy() << std::endl;
 
        for (int j = 0; j < uCPU.activeNy(); ++j) {
-          for (int i = (2*uCPU.activeNx()/3 - space*cell); i < uCPU.activeNx(); ++i) {
+          for (int i = uCPU.activeNx()/2; i < uCPU.activeNx(); ++i) {
 		 //for (int i = 0; i < uCPU.activeNx(); ++i) {
 		 //for (int i = 2*uCPU.activeNx()/3; i < uCPU.activeNx(); ++i) {
  
@@ -361,7 +360,7 @@ uCPU = *solver.u;
         outFile2 << "CELL_DATA " << uCPU.activeNx() * uCPU.activeNy() << std::endl;
 
         for (int j = 0; j < uCPU.activeNy(); ++j) {
-           for (int i = (2*uCPU.activeNx()/3 - space*cell); i < uCPU.activeNx(); ++i) {
+           for (int i = uCPU.activeNx()/2; i < uCPU.activeNx(); ++i) {
 		  //for (int i = 0; i < uCPU.activeNx(); ++i) {
 		  //for (int i = 2*uCPU.activeNx()/3; i < uCPU.activeNx(); ++i) {
  
@@ -384,7 +383,7 @@ uCPU = *solver.u;
         outFile3 << "CELL_DATA " << uCPU.activeNx() * uCPU.activeNy() << std::endl;
 
        for (int j = 0; j < uCPU.activeNy(); ++j) {
-          for (int i = (2*uCPU.activeNx()/3 - space*cell); i < uCPU.activeNx(); ++i) {
+          for (int i = uCPU.activeNx()/2; i < uCPU.activeNx(); ++i) {
 		 //for (int i = 0; i < uCPU.activeNx(); ++i) {
 //		 for (int i = 2*uCPU.activeNx()/3; i < uCPU.activeNx(); ++i) {
  
@@ -407,7 +406,7 @@ uCPU = *solver.u;
         outFile4 << "CELL_DATA " << uCPU.activeNx() * uCPU.activeNy() << std::endl;
 
        for (int j = 0; j < uCPU.activeNy(); ++j) {
-           for (int i = (2*uCPU.activeNx()/3 - space*cell); i < uCPU.activeNx(); ++i) {
+           for (int i = uCPU.activeNx()/2; i < uCPU.activeNx(); ++i) {
 		  //for (int i = 0; i < uCPU.activeNx(); ++i) {
 		  //for (int i = 2*uCPU.activeNx()/3; i < uCPU.activeNx(); ++i) {
  
@@ -430,7 +429,7 @@ uCPU = *solver.u;
         outFile5 << "CELL_DATA " << uCPU.activeNx() * uCPU.activeNy() << std::endl;
 
        for (int j = 0; j < uCPU.activeNy(); ++j) {
-           for (int i = (2*uCPU.activeNx()/3 - space*cell); i < uCPU.activeNx(); ++i) {
+           for (int i = uCPU.activeNx()/2; i < uCPU.activeNx(); ++i) {
 		  //for (int i = 0; i < uCPU.activeNx(); ++i) {
 		  //for (int i = 2*uCPU.activeNx()/3; i < uCPU.activeNx(); ++i) {
  
@@ -453,7 +452,7 @@ uCPU = *solver.u;
         outFile6 << "CELL_DATA " << uCPU.activeNx() * uCPU.activeNy() << std::endl;
 
         for (int j = 0; j < uCPU.activeNy(); ++j) {
-          for (int i = (2*uCPU.activeNx()/3 - space*cell); i < uCPU.activeNx(); ++i) {
+          for (int i = uCPU.activeNx()/2; i < uCPU.activeNx(); ++i) {
 		  //for (int i = 0; i < uCPU.activeNx(); ++i) {
 		  //for (int i = 2*uCPU.activeNx()/3; i < uCPU.activeNx(); ++i) {
  
@@ -487,23 +486,23 @@ uCPU = *solver.u;
 //////////////////////////////////////////////////////////（将最后1500网格的数据贴到前面1500的网格上） 		
   //for (int ni = 0; ni < uCPU.activeNx()/3; ++ni) {
  
- for (int ni = 0; ni < (1*uCPU.activeNx()/3 + space*cell); ++ni) {
+ for (int ni = 0; ni < uCPU.activeNx()/2; ++ni) {
   for (int nj = 0; nj < uCPU.activeNy(); ++nj) {  
  
-    uCPU(ni, nj)[DENSITY] = uCPU(ni+2*uCPU.activeNx()/3 - space*cell, nj)[DENSITY];
-    uCPU(ni, nj)[XMOMENTUM]  = uCPU(ni+2*uCPU.activeNx()/3 - space*cell, nj)[XMOMENTUM];
-    uCPU(ni, nj)[YMOMENTUM] = uCPU(ni+2*uCPU.activeNx()/3 - space*cell, nj)[YMOMENTUM];
-    uCPU(ni, nj)[LAMBDA0] = uCPU(ni+2*uCPU.activeNx()/3 - space*cell, nj)[LAMBDA0];
-    uCPU(ni, nj)[LAMBDA1] = uCPU(ni+2*uCPU.activeNx()/3 - space*cell, nj)[LAMBDA1];
-    uCPU(ni, nj)[ENERGY]  = uCPU(ni+2*uCPU.activeNx()/3 - space*cell, nj)[ENERGY];
-    uCPU(ni, nj)[PMAX] = uCPU(ni+2*uCPU.activeNx()/3 - space*cell, nj)[PMAX];
+    uCPU(ni, nj)[DENSITY] = uCPU(ni+uCPU.activeNx()/2, nj)[DENSITY];
+    uCPU(ni, nj)[XMOMENTUM]  = uCPU(ni+uCPU.activeNx()/2, nj)[XMOMENTUM];
+    uCPU(ni, nj)[YMOMENTUM] = uCPU(ni+uCPU.activeNx()/2, nj)[YMOMENTUM];
+    uCPU(ni, nj)[LAMBDA0] = uCPU(ni+uCPU.activeNx()/2, nj)[LAMBDA0];
+    uCPU(ni, nj)[LAMBDA1] = uCPU(ni+uCPU.activeNx()/2, nj)[LAMBDA1];
+    uCPU(ni, nj)[ENERGY]  = uCPU(ni+uCPU.activeNx()/2, nj)[ENERGY];
+    uCPU(ni, nj)[PMAX] = uCPU(ni+uCPU.activeNx()/2, nj)[PMAX];
 
  }
  }
 //Initialize new domain///////////////////////////////////////////////////////////////////////////////////////////// 
 
   //for (int ni = uCPU.activeNx()/3; ni < uCPU.activeNx(); ++ni){
-  for (int ni = (uCPU.activeNx()/3 + space*cell); ni < uCPU.activeNx(); ++ni){
+  for (int ni = uCPU.activeNx()/2; ni < uCPU.activeNx(); ++ni){
   for (int nj = 0; nj < uCPU.activeNy(); ++nj){
 
      uCPU(ni, nj)[DENSITY]    = 1.0;
